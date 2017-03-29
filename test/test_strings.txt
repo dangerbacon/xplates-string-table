@@ -1,0 +1,46 @@
+
+
+
+
+
+
+//Very simple string map:  call bundle.hello_world()
+hello_world: Hello, World!    
+
+//Comments are supported with double slashes
+welcome_msg:  Welcome! //At the ends of lines too.
+
+//Arguments are fully supported, call bundle.hello("World")
+hello(name): Hello, <%= name %>!
+
+//Full code execution example
+party: Party like it's <%= new Date().getFullYear() %>
+
+//Conditional example for pluralization
+messages(count):  You have <%= count %> <%? count === 1 %>message<%??%>messages<%?%>
+
+//Multi-line example.
+poem:
+  Roses are red,      
+  Violets are blue,
+  
+  XPlates is awesome,      
+  String tables are too!      
+  
+//Map example, with a "__default" fallback
+//  bundle.color("red") -> "rojo"
+//  bundle.color("purple") -> "purple"   (will fall back on __default function)
+color$red:          rojo
+color$green:        verde
+color$blue:         azul
+color$__default(c): <%= c %>
+
+//Maps can have arguments too!    
+date_part$year(d):        Year <%= d.getFullYear() %>
+date_part$month(d):       Month <%= d.getMonth()+1 %>
+date_part$day(d):         Day <%= d.getDate() %>
+date_part$__default(k,d): Unknown <%= d.toISOString() %>
+
+//It's an XPlate bundle, so you can use the full logic of other pieces too!
+copyright_year: 2017
+copyright_statement:  Copyright <%% copyright_year() %>, all right reserved.
