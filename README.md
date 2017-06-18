@@ -52,6 +52,9 @@ It reads easy-to-use string tables that have the full power of JavaScript and XP
     copyright_year: 2017
     copyright_statement:  Copyright <%% copyright_year() %>, all right reserved.
     
+    //You can override the default language by adding it as a prefix.  Any XPlates-supported language works.
+    html:greeting(name): <b>Hello, <i><%= name %></i>!</b>
+    
     
 Usage:
 
@@ -73,6 +76,15 @@ Usage:
     //Read a buffer or string asynchronously
     XPlatesStringTable.parseIntoBundle(bundle, { language: "text" }, my_string_table_buffer, function(err) { ... });
     
+    //It automatically trims every line, but you can turn that off.
+    XPlatesStringTable.parseFileIntoBundleSync(bundle, { language: "text", trim: false }, "/path/to/file.txt");
+    
+    //JavaScript style //comments will be automatically removed - but you can turn that off too:
+    XPlatesStringTable.parseFileIntoBundleSync(bundle, { language: "text", comments: false }, "/path/to/file.txt");
+    
+    //Additional paramaters that XPlates processes will be passed along, such as "predefined":
+    XPlatesStringTable.parseFileIntoBundleSync(bundle, { language: "text", predefined: { abc: 123 } }, "/path/to/file.txt");
+    
     //Get map keys
     //Example:  if you had a string table with this:
     //  color$red:          rojo
@@ -86,3 +98,8 @@ Usage:
     //Example:  using the same as above,
     //  bundle.color__keys() --> ["red","green","blue"]
     XPlatesStringTable.addKeyFunctions(bundle);
+    
+    //You can also require all new templates to start with a prefix you're worried about bad matches.
+    //For example, this makes line "TEMPLATE:foo:" start a template, and line "bar:" not start a template.
+    XPlatesStringTable.parseFileIntoBundleSync(bundle, { language: "text", prefix: "TEMPLATE:" }, "/path/to/file.txt");
+    

@@ -44,3 +44,19 @@ date_part$__default(k,d): Unknown <%= d.toISOString() %>
 //It's an XPlate bundle, so you can use the full logic of other pieces too!
 copyright_year: 2017
 copyright_statement:  Copyright <%% copyright_year() %>, all right reserved.
+
+//All options can be passed through to XPlates
+predef_example: <%= predef_test %>
+
+//Comment test
+line_with_comments: Hello //Comment!
+line_without_comments: Hello
+end_of_comments_tests: here //Ends the last template if comment-stripping is off.
+
+//Language test
+text_test(n): <%= n %>
+html:html_test(n): <%= n %>
+
+//Prefixes
+XPLATES_prefix_test: Prefixes work!
+nonprefixed_line: This should be part of it.
